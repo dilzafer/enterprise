@@ -12,32 +12,25 @@ function Header() {
 		});
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
-		try {
-			const response = await fetch("/", {
-				method: "POST",
-				headers: { "Content-Type": "application/x-www-form-urlencoded" },
-				body: encode({ "form-name": "contact", ...formData }),
-			});
-			if (!response.ok) {
-				throw new Error("Network response was not ok");
-			}
-			setFormData({
-				email: "",
-			});
-		} catch (error) {
-			alert(
-				"An error occurred while submitting the form. Please try again later.",
-			);
-		}
-	};
-	const encode = (data) => {
-		return Object.keys(data)
-			.map(
-				(key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]),
-			)
-			.join("&");
+
+		const encode = (data) => {
+			return Object.keys(data)
+				.map(
+					(key) =>
+						encodeURIComponent(key) + "=" + encodeURIComponent(data[key]),
+				)
+				.join("&");
+		};
+
+		fetch("http://localhost:3000/forms/submit", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: encode({ "form-name": "contact", ...formData }),
+		})
+			.then(() => alert("Success!"))
+			.catch((error) => alert(error));
 	};
 
 	return (
@@ -54,10 +47,14 @@ function Header() {
 				</p>
 				<div className='flex items-center justify-center'>
 					<div className='relative'>
-						<form onSubmit={handleSubmit} data-netlify='true' name='contact'>
+						<form
+							onSubmit={handleSubmit}
+							name='contact'
+							data-netlify='true'
+							data-netlify-honeypot='bot-field'
+						>
 							<input
 								type='email'
-								id='email'
 								name='email'
 								value={formData.email}
 								onChange={handleChange}
