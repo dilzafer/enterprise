@@ -26,6 +26,7 @@ function Header() {
 
 		fetch("https://clever-lebkuchen-dbe08e.netlify.app/forms/submit", {
 			method: "POST",
+			mode: "no-cors",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			body: encode({ "form-name": "contact", ...formData }),
 		})
