@@ -30,7 +30,7 @@ function Footer() {
 						<ul>
 							<li className='lg:mb-[50px] mb-6'>
 								<a href='#!' className='text-base text-ftrSub font-normal'>
-									Built with ❤️ in Boston, MA
+									Built with ❤️ in Boston
 								</a>
 							</li>
 							<li>
