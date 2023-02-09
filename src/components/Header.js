@@ -24,7 +24,7 @@ function Header() {
 				.join("&");
 		};
 
-		fetch("http://localhost:3000/forms/submit", {
+		fetch("https://enterprise.arcafeed.com/forms/submit", {
 			method: "POST",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			body: encode({ "form-name": "contact", ...formData }),
