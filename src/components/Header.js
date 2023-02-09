@@ -24,7 +24,7 @@ function Header() {
 				.join("&");
 		};
 
-		fetch("https://clever-lebkuchen-dbe08e.netlify.app/", {
+		fetch("/", {
 			method: "POST",
 			mode: "no-cors",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -48,12 +48,7 @@ function Header() {
 				</p>
 				<div className='flex items-center justify-center'>
 					<div className='relative'>
-						<form
-							onSubmit={handleSubmit}
-							name='contact'
-							data-netlify='true'
-							data-netlify-honeypot='bot-field'
-						>
+						<form onSubmit={handleSubmit} name='contact'>
 							<input
 								type='email'
 								name='email'
