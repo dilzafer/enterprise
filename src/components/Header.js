@@ -1,39 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Header() {
-	const [formData, setFormData] = useState({
-		email: "",
-	});
-
-	const handleChange = (event) => {
-		setFormData({
-			...formData,
-			[event.target.name]: event.target.value,
-		});
-	};
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
-		const encode = (data) => {
-			return Object.keys(data)
-				.map(
-					(key) =>
-						encodeURIComponent(key) + "=" + encodeURIComponent(data[key]),
-				)
-				.join("&");
-		};
-
-		fetch("/", {
-			method: "POST",
-			mode: "no-cors",
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: encode({ "form-name": "contact", ...formData }),
-		})
-			.then(() => alert("Success!"))
-			.catch((error) => alert(error));
-	};
-
 	return (
 		<header className='lg:py-24 py-5'>
 			<div className='container mx-auto lg:px-10 px-5'>
@@ -48,12 +15,15 @@ function Header() {
 				</p>
 				<div className='flex items-center justify-center'>
 					<div className='relative'>
-						<form onSubmit={handleSubmit} name='contact'>
+						<form
+							name='contact'
+							method='post'
+							data-netlify='true'
+							onSubmit='submit'
+						>
+							<input type='hidden' name='form-name' value='contact' />
 							<input
-								type='email'
 								name='email'
-								value={formData.email}
-								onChange={handleChange}
 								required
 								placeholder='Email address'
 								className='sm:w-[430px] w-full  h-[60px] pl-6 pr-48 border-2 !outline-none border-gray-300 lg:rounded-2xl rounded-xl'
