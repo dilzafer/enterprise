@@ -24,7 +24,7 @@ function Header() {
 				.join("&");
 		};
 
-		fetch("https://clever-lebkuchen-dbe08e.netlify.app/forms/submit", {
+		fetch("https://clever-lebkuchen-dbe08e.netlify.app/", {
 			method: "POST",
 			mode: "no-cors",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
