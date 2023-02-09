@@ -1,6 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Header() {
+	const [formData, setFormData] = useState({
+		email: "",
+	});
+
+	const handleChange = (event) => {
+		setFormData({
+			...formData,
+			[event.target.name]: event.target.value,
+		});
+	};
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		try {
+			const response = await fetch("/", {
+				method: "POST",
+				headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				body: encode({ "form-name": "contact", ...formData }),
+			});
+			if (!response.ok) {
+				throw new Error("Network response was not ok");
+			}
+			setFormData({
+				email: "",
+			});
+		} catch (error) {
+			alert(
+				"An error occurred while submitting the form. Please try again later.",
+			);
+		}
+	};
+	const encode = (data) => {
+		return Object.keys(data)
+			.map(
+				(key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]),
+			)
+			.join("&");
+	};
+
 	return (
 		<header className='lg:py-24 py-5'>
 			<div className='container mx-auto lg:px-10 px-5'>
@@ -15,17 +54,27 @@ function Header() {
 				</p>
 				<div className='flex items-center justify-center'>
 					<div className='relative'>
-						<input
-							type='text'
-							placeholder='Email address'
-							className='sm:w-[430px] w-full  h-[60px] pl-6 pr-48 border-2 !outline-none border-gray-300 lg:rounded-2xl rounded-xl'
-						/>
+						<form onSubmit={handleSubmit} data-netlify='true' name='contact'>
+							<input
+								type='email'
+								id='email'
+								name='email'
+								value={formData.email}
+								onChange={handleChange}
+								required
+								placeholder='Email address'
+								className='sm:w-[430px] w-full  h-[60px] pl-6 pr-48 border-2 !outline-none border-gray-300 lg:rounded-2xl rounded-xl'
+							/>
 
-						<div className='absolute top-1/2  right-[6px]  -translate-y-1/2'>
-							<button className='text-white font-Source font-bold text-base  bg-buton  py-3 px-10 rounded-[10px]'>
-								Join Waitlist
-							</button>
-						</div>
+							<div className='absolute top-1/2  right-[6px]  -translate-y-1/2'>
+								<button
+									type='submit'
+									className='text-white font-Source font-bold text-base  bg-buton  py-3 px-10 rounded-[10px]'
+								>
+									Join Waitlist
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
