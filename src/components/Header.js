@@ -24,7 +24,7 @@ function Header() {
 				.join("&");
 		};
 
-		fetch("https://enterprise.arcafeed.com/forms/submit", {
+		fetch("https://clever-lebkuchen-dbe08e.netlify.app/forms/submit", {
 			method: "POST",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			body: encode({ "form-name": "contact", ...formData }),
