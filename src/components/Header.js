@@ -18,7 +18,7 @@ function Header() {
 						<input
 							type='text'
 							placeholder='Email address'
-							className=' w-[346px]  h-[60px] pl-6 pr-48 border-2 !outline-none border-gray-300 lg:rounded-2xl rounded-xl'
+							className='sm:w-[430px] w-full  h-[60px] pl-6 pr-48 border-2 !outline-none border-gray-300 lg:rounded-2xl rounded-xl'
 						/>
 
 						<div className='absolute top-1/2  right-[6px]  -translate-y-1/2'>
